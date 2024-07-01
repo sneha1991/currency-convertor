@@ -1,0 +1,52 @@
+<div class="dashboard-cards-container">
+  <mat-card class="currency-card">
+    <mat-card-header class="card-title">
+      <mat-card-title>
+        1 {{ toAmount.base_code }} = {{ toAmount.conversion_rate }}
+        {{ toAmount.target_code }}</mat-card-title
+      >
+    </mat-card-header>
+    <mat-card-content class="card-content-center">
+      <app-currency-list
+        [label]="'From'"
+        [countries]="fromCountries"
+        [selectedValue]="selectedFromCurrency"
+        (selectedCurrencyChange)="onFromCurrencyChange($event)"
+      ></app-currency-list>
+
+      <app-currency-list
+        [label]="'To'"
+        [countries]="toCountries"
+        [selectedValue]="selectedToCurrency"
+        (selectedCurrencyChange)="onToCurrencyChange($event)"
+      ></app-currency-list>
+
+      <mat-label class="curr-text">Amount</mat-label>
+      <mat-form-field appearance="outline">
+        <span matTextPrefix
+          >{{ getCurrencySymbol(selectedFromCurrency) }} &nbsp;</span
+        >
+        <input matInput type="number" [(ngModel)]="fromAmount" required />
+      </mat-form-field>
+      @if(fromAmount && converted) {
+      <mat-label class="curr-text"
+        ><b>Result: {{ toAmount.conversion_result }}</b>
+        {{ toAmount.target_code }}</mat-label
+      >
+      <p class="curr-text">
+        Updated On: {{ toAmount.time_last_update_utc | date : "medium" }}
+      </p>
+      }
+    </mat-card-content>
+    <mat-card-footer class="card-footer">
+      <button
+        mat-button
+        color="accent"
+        [disabled]="fromAmount <= 0"
+        (click)="onSubmit()"
+      >
+        Convert
+      </button>
+    </mat-card-footer>
+  </mat-card>
+</div>

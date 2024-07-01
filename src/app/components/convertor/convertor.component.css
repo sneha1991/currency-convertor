@@ -1,0 +1,46 @@
+.dashboard-cards-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .currency-card {
+    width: 500px; 
+    height: 500px;
+    margin: 10px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+
+    .card-title {
+        height: 50px; 
+        background-color: #ff4081;
+        justify-content:center;  
+      }
+    
+      .card-content-center {
+        height: calc(100% - 100px);
+      }
+    
+      .card-footer {
+        height: 50px; 
+      }
+     
+      .curr-text{
+       margin-left: 20px;
+      }
+
+      .mat-mdc-button.mat-accent {
+        background-color: var(--mdc-text-button-label-text-color);
+        color: #ffffff;
+        width: -webkit-fill-available;
+         padding: 20px;
+        margin: 0 5%;
+        &:hover {
+          background-color: #cd2828 !important; 
+        }
+        &:disabled{
+          background-color: #eee !important;
+        }
+      }
+  }
+
+  
+ 

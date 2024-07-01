@@ -1,0 +1,16 @@
+mat-select-trigger {
+  display: flex;
+  align-items: center;
+  .country-code {
+    padding: 0 5px;
+  }
+  img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+.mat-icon {
+  height: 35px;
+  width: 50px;
+  margin-right: 11px;
+}

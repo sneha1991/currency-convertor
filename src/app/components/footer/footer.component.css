@@ -1,0 +1,8 @@
+.footer{
+    position:absolute;
+    bottom:0;
+    margin:0;
+    font-size: 12px;
+    white-space: pre-wrap;
+    line-height: 1.2;
+}

@@ -1,0 +1,29 @@
+<mat-form-field appearance="fill">
+  <mat-label>{{ label }}</mat-label>
+
+  <mat-select
+    [(value)]="selectedValue"
+    (selectionChange)="onCurrencyChange($event)"
+    class="cntry-select"
+  >
+    <mat-select-trigger>
+      <mat-icon>
+        <img [src]="selectedValue && selectedValue.flagUrl" alt="{{ selectedValue && selectedValue.code }}" />
+      </mat-icon>
+      <span class="country-code">
+        {{ selectedValue && selectedValue.code }} - {{ selectedValue && selectedValue.name }}
+      </span>
+    </mat-select-trigger>
+    @for(country of countries;let i= $index;track i){
+    <mat-option [value]="country">
+      @if(country.code){
+      <mat-icon>
+        <img [src]="country.flagUrl" alt="{{ country.code }}" /> </mat-icon
+      >} {{ country.code }} - {{ country.name }}
+    </mat-option>
+
+    }@empty {
+    <p>Not Available!</p>
+    }
+  </mat-select>
+</mat-form-field>
