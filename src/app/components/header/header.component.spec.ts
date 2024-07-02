@@ -9,10 +9,7 @@ describe('HeaderComponent', () => {
   let fixture: ComponentFixture<HeaderComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [HeaderComponent],
-      schemas: [NO_ERRORS_SCHEMA],
-    }).compileComponents();
+    await TestBed.configureTestingModule({}).compileComponents();
 
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
@@ -23,10 +20,12 @@ describe('HeaderComponent', () => {
     expect(component).toBeTruthy();
   });
 
+ 
+
   describe('UI testing', () => {
     it('should have a title', () => {
       const h1 = fixture.debugElement.query(By.css('h1'));
-      expect(h1.nativeElement.textContent).toEqual('WTW');
+      expect(h1.nativeElement.textContent).toEqual('Netwealth Currency Convertor');
     });
   });
 });

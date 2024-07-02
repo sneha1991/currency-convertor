@@ -1,16 +1,15 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, catchError, throwError } from "rxjs";
+import { Observable } from "rxjs";
 import { CurrencyRequest, CurrencyResponse } from "../models/currency.model";
 import { environment } from "../../environments/environment";
-import { Country, CountryList } from "../models/country.model";
+import { CountryCodeResponse, CountryList } from "../models/country.model";
 
 @Injectable({
   providedIn: "root",
 })
 export class CurrencyService {
-  private currencybaseUrl: string = environment.conversionbaseUrl;
-  private countrybaseUrl= environment.countrybaseUrl;
+  private baseUrl: string = environment.baseUrl;
   private apiKey = environment.apiKey;
 
   constructor(private http: HttpClient) {}
@@ -18,17 +17,15 @@ export class CurrencyService {
   getCurrencyConvertion(
     currencyRequest: CurrencyRequest
   ): Observable<CurrencyResponse> {
-    const url = `${this.currencybaseUrl}/${this.apiKey}/pair/${currencyRequest.base}/${
+    const url = `${this.baseUrl}/${this.apiKey}/pair/${currencyRequest.base}/${
       currencyRequest.target
     }${currencyRequest.amount ? `/${currencyRequest.amount}` : ""}`;
     return this.http.get<CurrencyResponse>(url,this.generateHeaders());
   }
 
-  
-
-  getCountryList(): Observable<CountryList> {
-    const url = `${this.currencybaseUrl}/${this.apiKey}`;
-      return this.http.get<CountryList>(url+"/codes/",this.generateHeaders())
+  getCountryList(): Observable<CountryCodeResponse> {
+    const url = `${this.baseUrl}/${this.apiKey}`;
+      return this.http.get<CountryCodeResponse>(url+"/codes/",this.generateHeaders())
     }
 
   private generateHeaders() {

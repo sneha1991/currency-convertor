@@ -13,6 +13,8 @@ export interface Country {
   flagUrl?: string;
 }
 
-export interface CountryList {
-  supported_codes: [];
+export interface CountryCodeResponse {
+  supported_codes: CountryList;
 }
+
+export type CountryList = [string, string][];

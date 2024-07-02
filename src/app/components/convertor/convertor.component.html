@@ -1,10 +1,11 @@
 <div class="dashboard-cards-container">
   <mat-card class="currency-card">
     <mat-card-header class="card-title">
+      @if(toAmount){
       <mat-card-title>
         1 {{ toAmount.base_code }} = {{ toAmount.conversion_rate }}
         {{ toAmount.target_code }}</mat-card-title
-      >
+      >}
     </mat-card-header>
     <mat-card-content class="card-content-center">
       <app-currency-list
@@ -28,7 +29,7 @@
         >
         <input matInput type="number" [(ngModel)]="fromAmount" required />
       </mat-form-field>
-      @if(fromAmount && converted) {
+      @if(fromAmount && converted && toAmount) {
       <mat-label class="curr-text"
         ><b>Result: {{ toAmount.conversion_result }}</b>
         {{ toAmount.target_code }}</mat-label

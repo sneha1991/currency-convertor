@@ -5,7 +5,7 @@ import { Country } from '../../models/country.model';
 
 export interface AppState {
   currency: CurrencyResponse;
-  countries: [];
+  countries: [string,string][];
   loading: boolean;
   error: string | null;
 }

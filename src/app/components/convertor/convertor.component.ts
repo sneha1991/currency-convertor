@@ -80,11 +80,11 @@ export class ConvertorComponent implements OnInit, OnDestroy {
     this.store
       .select(selectCountries)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((_countries: []) => {
-        this.countries = _countries.map((res) => ({
-          code: res[0],
-          name: res[1],
-          flagUrl: this.getFlagUrl(res[0]),
+      .subscribe((_countries) => {
+        this.countries = _countries.map(([code, name]) => ({
+          code,
+          name,
+          flagUrl: this.getFlagUrl(code),
         }));
         this.selectedFromCurrency = this.countries[0];
         this.selectedToCurrency = this.countries[1];
@@ -100,13 +100,14 @@ export class ConvertorComponent implements OnInit, OnDestroy {
       });
 
     this.fromAmount = 1;
-
     this.loading$ = this.store.select(selectLoading);
     this.error$ = this.store.select(selectError);
   }
 
   getFlagUrl(code: string): string {
-    return `https://wise.com/public-resources/assets/flags/rectangle/${code.toLowerCase()}.png`;
+    return code
+      ? `https://wise.com/public-resources/assets/flags/rectangle/${code.toLowerCase()}.png`
+      : "";
   }
 
   onSubmit(): void {
@@ -126,12 +127,14 @@ export class ConvertorComponent implements OnInit, OnDestroy {
   }
 
   filterDropDown(): void {
-    this.fromCountries = this.countries.filter(
-      (cnt) => cnt.code !== this.selectedToCurrency.code
-    );
-    this.toCountries = this.countries.filter(
-      (cnt) => cnt.code !== this.selectedFromCurrency.code
-    );
+    if (this.selectedToCurrency && this.selectedToCurrency) {
+      this.fromCountries = this.countries.filter(
+        (cnt) => cnt.code !== this.selectedToCurrency.code
+      );
+      this.toCountries = this.countries.filter(
+        (cnt) => cnt.code !== this.selectedFromCurrency.code
+      );
+    }
   }
 
   onFromCurrencyChange(event: any): void {

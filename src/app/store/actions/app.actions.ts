@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
-import { Currency, CurrencyRequest, CurrencyResponse } from '../../models/currency.model';
-import { Country } from '../../models/country.model';
+import {  CurrencyRequest, CurrencyResponse } from '../../models/currency.model';
+import { CountryCodeResponse, CountryList } from '../../models/country.model';
+
 
 
 export const LOAD_CURRENCIES = '[currency] load currencies';
@@ -30,7 +31,7 @@ export const loadCurrencyConversionFailure = createAction(
 export const loadCountries = createAction(LOAD_COUNTRIES);
 export const loadCountriesSuccess = createAction(
   LOAD_COUNTRIES_SUCCESS,
-  props<{ countries: []}>()
+  props<{ countries: CountryList }>()
 );
 export const loadCountriesFailure = createAction(
   LOAD_COUNTRIES_FAILURE,

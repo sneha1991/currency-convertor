@@ -6,11 +6,12 @@ import { catchError, map, switchMap } from "rxjs/operators";
 import * as AppActions from "../actions/app.actions";
 import { CurrencyService } from "../../services/currency.service";
 import { CurrencyResponse } from "../../models/currency.model";
-import { CountryList } from "../../models/country.model";
+import { CountryCodeResponse } from "../../models/country.model";
 
 @Injectable()
 export class AppEffects {
   snackBar = inject(MatSnackBar);
+  
   constructor(
     private actions$: Actions,
     private currencyService: CurrencyService
@@ -21,7 +22,7 @@ export class AppEffects {
       ofType(AppActions.loadCountries),
       switchMap(() =>
         this.currencyService.getCountryList().pipe(
-          map((response: CountryList) => {
+          map((response: CountryCodeResponse) => {
             return AppActions.loadCountriesSuccess({
               countries: response.supported_codes,
             });

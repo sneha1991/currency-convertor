@@ -15,7 +15,7 @@ export interface CurrencyResponse {
 
 }
 
-export interface Currency {
-  code: string;
-  name?: string;
-}
+// export interface Currency {
+//   code: string;
+//   name?: string;
+// }
